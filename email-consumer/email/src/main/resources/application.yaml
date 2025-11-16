@@ -1,0 +1,59 @@
+spring:
+  application:
+    name: email-consumer
+
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: somesh.sah@gmail.com
+    password: aodzzezsdjecsupq
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
+
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: email-consumer-group
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
+      properties:
+        spring.deserializer.value.delegate.class: org.springframework.kafka.support.serializer.JsonDeserializer
+        spring.json.trusted.packages: "com.kafka.shared.dto"
+        spring.json.value.default.type: "com.kafka.shared.dto.EmailRequest"
+
+#  kafka:
+#    bootstrap-servers: localhost:9092
+#    consumer:
+#      group-id: email-consumer-group
+#      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+#      value-deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
+#      properties:
+#        spring.deserializer.value.delegate.class: org.springframework.kafka.support.serializer.JsonDeserializer
+#        spring.json.trusted.packages: "com.kafka.consumer.email.dto.*" # or use "*" to trust all
+
+
+#  kafka:
+#    consumer:
+#      group-id: email-consumer-group
+#      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+#      value-deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
+#      properties:
+#        spring.kafka.consumer.properties.spring.deserializer.value.delegate.class: org.springframework.kafka.support.serializer.JsonDeserializer
+#        spring.json.trusted.packages: "com.kafka.producer.email.dto"
+#        spring.kafka.consumer.properties.spring.json.value.default.type: com.kafka.producer.email.dto.EmailRequest
+
+
+
+server:
+  port: 9882
+
+my-gmail:
+  email: sahsome09@gmail.com
+
+kafka:
+  email_topic: EMAIL_TOPIC2
